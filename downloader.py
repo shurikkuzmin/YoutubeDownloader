@@ -7,6 +7,7 @@ from __future__ import unicode_literals
 import youtube_dl
 import os
 from flask import Flask
+import flask
 
 
 def downloadMP3():
@@ -28,9 +29,10 @@ def downloadMP3():
     os.rename(result["id"], newName)
     
 app = Flask(__name__)
+
 @app.route("/")
 def hello_world():
-    return "Hello, World!"
+    return flask.render_template("example.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
