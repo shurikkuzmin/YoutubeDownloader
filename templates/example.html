@@ -2,7 +2,13 @@
 <title>Welcome page </title>
 
 <body>
-<h1>Hello, world!</h1>
+<h1>Hello, {{ name }}!</h1>
 
+Please enter your Youtube url:
+
+<form action="{{ url_for('hello_world') }}" method="post">
+    <input type="url" id="Link" name="YoutubeLink">
+    <input type="submit" value="Submit">
+</form>
 </body>
 </html>

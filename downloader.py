@@ -7,6 +7,7 @@ from __future__ import unicode_literals
 import youtube_dl
 import os
 from flask import Flask
+from flask import request
 import flask
 
 
@@ -30,9 +31,11 @@ def downloadMP3():
     
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def hello_world():
-    return flask.render_template("example.html")
+    if request.method == "POST":
+        print(request.form["YoutubeLink"])
+    return flask.render_template("example.html", name="Amir, Edwin and Matthew")
 
 if __name__ == '__main__':
     app.run(debug=True)
