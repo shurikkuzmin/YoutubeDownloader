@@ -11,7 +11,7 @@ from flask import request
 import flask
 
 
-def downloadMP3():
+def downloadMP3(youtubeLink):
     options = {
         'format': 'bestaudio/best', # choice of quality
         'extractaudio' : True,      # only keep the audio
@@ -21,7 +21,7 @@ def downloadMP3():
     
     ydl = youtube_dl.YoutubeDL(options)
     
-    result = ydl.extract_info("https://www.youtube.com/watch?v=6A2mcpjq6F4&ab_channel=jouhari", download=True)
+    result = ydl.extract_info(youtubeLink, download=True)
     
     newName = result["id"] + ".mp3"
     if "track" in result and "artist" in result:
@@ -29,12 +29,14 @@ def downloadMP3():
         
     os.rename(result["id"], newName)
     
+    
+    
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def hello_world():
     if request.method == "POST":
-        print(request.form["YoutubeLink"])
+        downloadMP3(request.form["YoutubeLink"])
     return flask.render_template("example.html", name="Amir, Edwin and Matthew")
 
 if __name__ == '__main__':
