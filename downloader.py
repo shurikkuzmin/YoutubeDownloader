@@ -7,7 +7,7 @@ from __future__ import unicode_literals
 import youtube_dl
 import os
 from flask import Flask
-from flask import request
+from flask import request,send_from_directory
 import flask
 
 
@@ -26,9 +26,11 @@ def downloadMP3(youtubeLink):
     newName = result["id"] + ".mp3"
     if "track" in result and "artist" in result:
         newName = result["artist"].replace(" ", "_") + "_" + result["track"].replace(" ", "_") + ".mp3"
-        
-    os.rename(result["id"], newName)
     
+    if not os.path.exists(newName):
+        os.rename(result["id"], newName)
+    
+    return newName
     
     
 app = Flask(__name__)
@@ -36,7 +38,8 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def hello_world():
     if request.method == "POST":
-        downloadMP3(request.form["YoutubeLink"])
+        mp3Name = downloadMP3(request.form["YoutubeLink"])
+        return flask.send_from_directory("", mp3Name, as_attachment=True)
     return flask.render_template("example.html", name="Amir, Edwin and Matthew")
 
 if __name__ == '__main__':
