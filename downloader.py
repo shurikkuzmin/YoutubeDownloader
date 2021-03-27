@@ -40,7 +40,7 @@ def hello_world():
     if request.method == "POST":
         mp3Name = downloadMP3(request.form["YoutubeLink"])
         return flask.send_from_directory("", mp3Name, as_attachment=True)
-    return flask.render_template("example.html", name="Amir, Edwin and Matthew")
+    return flask.render_template("example.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
