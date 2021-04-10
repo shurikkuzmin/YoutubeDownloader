@@ -1,12 +1,13 @@
 <html>
 <head>
-<title>Welcome page </title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Train+One|Syne+Mono">
+    <title>Welcome page </title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Train+One|Syne+Mono">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css.css') }}">
 </head>
 <body>
 
-<div style="background-color: #333333; padding-top: 50px; padding-bottom: 50px;">
-    <h1 style="font-family: 'Train One'; font-size: 60; color: white; text-align: center;">Youtube Downloader<h1>
+<div id="header">
+    <h1>Youtube Downloader<h1>
 </div>
 <div>
     <h2 style="font-family: 'Syne Mono'; text-align: center; font-size: 40;">Enter Youtube URL<h2>
