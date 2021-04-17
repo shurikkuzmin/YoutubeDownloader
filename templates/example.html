@@ -10,12 +10,15 @@
     <h1>Youtube Downloader<h1>
 </div>
 <div>
-    <h2 style="font-family: 'Syne Mono'; text-align: center; font-size: 40;">Enter Youtube URL<h2>
+    <h2 id="youtube">Enter Youtube URL<h2>
 <div>
-<div>
-    <form style="text-align: center;" action="{{ url_for('hello_world') }}" method="post">
-        <input style="width: 40%; height: 50px;" type="url" id="Link" name="YoutubeLink">
-        <input style="height: 50px; font-size: 20px; padding-bottom: 5px;" type="submit" value="Submit">
+<div id="youtubeForm">
+    <form action="{{ url_for('hello_world') }}" method="post">
+        <input id="Link" type="url"  name="YoutubeLink">
+        <br>
+        <button>MP3</button>
+        <button>MP4</button>
+        <br>
     </form>
 </div>
 </body>

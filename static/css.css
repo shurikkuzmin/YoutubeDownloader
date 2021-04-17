@@ -1,3 +1,9 @@
+#youtube {
+    font-family: 'Syne Mono'; 
+    text-align: center; 
+    font-size: 40;
+}
+
 #header {
     background-color: #333333; 
     padding-top: 50px; 
@@ -6,7 +12,26 @@
 
 #header h1 {
     font-family: 'Train One'; 
-    font-size: 60; 
+    font-size: 80; 
     color: white; 
     text-align: center;
 }
+
+#youtubeForm
+{
+    text-align: center;
+}
+
+#Link
+{
+    width: 40%; 
+    height: 50px;
+}
+
+#submitButton
+{
+    height: 50px; 
+    font-size: 20px; 
+    padding-bottom: 5px;
+}
+
