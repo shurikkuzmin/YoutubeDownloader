@@ -32,14 +32,40 @@ def downloadMP3(youtubeLink):
     
     return newName
     
+   
+def downloadMP4(youtubeLink):
+    options = {
+        'outtmpl': '%(id)s',        # name the file the ID of the video
+        'noplaylist' : True
+    }      
     
+    ydl = youtube_dl.YoutubeDL(options)
+    
+    result = ydl.extract_info(youtubeLink, download=True)
+    print(result)
+    newName = result["id"] + ".mp4"
+    if "track" in result and "artist" in result:
+        newName = result["artist"].replace(" ", "_") + "_" + result["track"].replace(" ", "_") + ".mp4"
+    
+    if not os.path.exists(newName):
+        os.rename(result["id"], newName)
+    
+    return newName
+ 
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def hello_world():
     if request.method == "POST":
-        mp3Name = downloadMP3(request.form["YoutubeLink"])
-        return flask.send_from_directory("", mp3Name, as_attachment=True)
+        if request.form["YoutubeLink"] == "":
+            return flask.render_template("example.html")
+        if "MP3" in request.form:
+            fileName = downloadMP3(request.form["YoutubeLink"])
+        else:
+            fileName = downloadMP4(request.form["YoutubeLink"])
+            
+        return flask.send_from_directory("", fileName, as_attachment=True)
+    
     return flask.render_template("example.html")
 
 if __name__ == '__main__':
