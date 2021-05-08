@@ -23,9 +23,12 @@ def downloadMP3(youtubeLink):
     
     result = ydl.extract_info(youtubeLink, download=True)
     
+    if result == None:
+        return ""
     newName = result["id"] + ".mp3"
     if "track" in result and "artist" in result:
-        newName = result["artist"].replace(" ", "_") + "_" + result["track"].replace(" ", "_") + ".mp3"
+        if result["artist"] != None and result["track"] != None:
+            newName = result["artist"].replace(" ", "_") + "_" + result["track"].replace(" ", "_") + ".mp3"
     
     if not os.path.exists(newName):
         os.rename(result["id"], newName)
@@ -63,8 +66,8 @@ def hello_world():
             fileName = downloadMP3(request.form["YoutubeLink"])
         else:
             fileName = downloadMP4(request.form["YoutubeLink"])
-            
-        return flask.send_from_directory("", fileName, as_attachment=True)
+        if fileName != "":  
+            return flask.send_from_directory("", fileName, as_attachment=True)
     
     return flask.render_template("example.html")
 
